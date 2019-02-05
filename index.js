@@ -13,7 +13,15 @@ app.listen(5000);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.get('/', function(req, res){   
+      res.send("<h1> hellow africa </h1>");
+
+
+});
+
 var BAL  = require('./routes/app');
+
+
 
 app.use('/actions', BAL);
 
