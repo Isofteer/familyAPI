@@ -1,5 +1,5 @@
 var config = {
-    user: "tonnie",
+    user: "postgres",
     host: "localhost",
     database: "family",
     password: "kukuz1000",
