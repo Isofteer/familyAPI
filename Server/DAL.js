@@ -84,11 +84,12 @@ GetUnclesAndAunties(id) {
 }
 
  
-    Register(id) {
+    Register(p) {
         
-        const sql = "select * from getgrandparents("+id+");";
+        const sql = "select * from SaveMember($1, $2, $3, $4, $5, $6, $7, $8, $9,$10,$11)";
         return new Promise( ( resolve, reject ) => {
-            this.pool.query( sql,( err, rows ) => {
+            this.pool.query( sql,[p.firstname,p.surname,p.middlename,p.gender,p.dateofbirth,p.nationalid,p.phone,p.email,p.pictureid,p.username,p.password],
+                ( err, rows ) => {
                 if ( err )
                     return reject( err );  
                     
@@ -99,6 +100,22 @@ GetUnclesAndAunties(id) {
             } );
         } );
     }
+
+    GetMember(p) {      
+        const sql = "select * from tblfamilymembers where nationalid ='"+p.searchValue+"' or phone ='"+p.searchValue+"'";
+        return new Promise( ( resolve, reject ) => {
+            this.pool.query( sql,( err, rows ) => {
+                if ( err )
+                    return reject( err );  
+                    
+                this.pool.end();
+                resolve( rows );
+    
+    
+            } );
+        } );
+    }
+    
 
     close() {
         return new Promise( ( resolve, reject ) => {

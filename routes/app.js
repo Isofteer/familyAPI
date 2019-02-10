@@ -101,6 +101,23 @@ router.post('/Getgrandparents', function(req, res){
    // res.send(JSON.stringify(req.body));
   
  });
+ router.post('/GetMember', function(req, res){
+    
+    let _dal = new DAL();
 
+    _dal.GetMember(req.body).then((response,error)=>{
+        if(error)
+         res.send("Theres was an error");
+
+         res.send(JSON.stringify(response));
+    }).catch(error=>{
+        res.send(JSON.stringify(error));
+    })
+   // res.send(JSON.stringify(req.body));
+  
+ });
+
+
+ 
 
  module.exports = router;
